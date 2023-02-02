@@ -1,10 +1,6 @@
 const express = require('express')
 const app = express()
-app.all('/', (req, res) => {
-    res.send('Hi:)')
-})
-
-app.get('/feedback', (req, res) => {
+app.get('/', (req, res) => {
     const mailgun = require("mailgun-js");
     const mg = mailgun({apiKey: process.env.apiKey, domain: process.env.domain});
     const data = {
@@ -15,7 +11,7 @@ app.get('/feedback', (req, res) => {
     };
     mg.messages().send(data, function (error, body) {
         console.log(error,body);
-        res.send()
+        res.send('Done')
     });
 })
 
